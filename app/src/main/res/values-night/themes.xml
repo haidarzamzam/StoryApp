@@ -14,4 +14,9 @@
         <!-- Customize your theme here. -->
         <item name="android:fontFamily">@font/google_sans_regular</item>
     </style>
+
+    <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">#fff</item>
+        <item name="boxStrokeWidth">2dp</item>
+    </style>
 </resources>
