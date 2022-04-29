@@ -11,7 +11,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StoryApp">
         <activity
-            android:name="com.haidev.storyapp.ui.screen.splash.SplashActivity"
+            android:name=".ui.screen.register.RegisterActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.screen.login.LoginActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.screen.splash.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
