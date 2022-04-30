@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.afollestad.materialdialogs.MaterialDialog
 import com.haidev.storyapp.R
 import com.haidev.storyapp.data.model.Status
-import com.haidev.storyapp.data.model.StoryModel
 import com.haidev.storyapp.databinding.ActivityStoryBinding
 import com.haidev.storyapp.di.prefs
 import com.haidev.storyapp.ui.base.BaseActivity
@@ -37,9 +36,7 @@ class StoryActivity : BaseActivity<ActivityStoryBinding, StoryViewModel>(),
     private fun initUI() {
         binding?.rvStory?.apply {
             layoutManager = LinearLayoutManager(this@StoryActivity)
-            storyItemAdapter = StoryItemAdapter {
-                goToDetailStory(it)
-            }
+            storyItemAdapter = StoryItemAdapter(context)
             adapter = storyItemAdapter
         }
 
@@ -73,12 +70,6 @@ class StoryActivity : BaseActivity<ActivityStoryBinding, StoryViewModel>(),
         startActivity(Intent(this@StoryActivity, LoginActivity::class.java))
     }
 
-    override fun goToDetailStory(data: StoryModel.Response.Story) {
-        val intent = Intent(this@StoryActivity, DetailStoryActivity::class.java)
-        intent.putExtra(DetailStoryActivity.EXTRA_DATA_STORY, data)
-        startActivity(intent)
-    }
-
     override fun goToAddStory() {
         val intent = Intent(this@StoryActivity, AddStoryActivity::class.java)
         resultLauncher.launch(intent)
@@ -105,6 +96,7 @@ class StoryActivity : BaseActivity<ActivityStoryBinding, StoryViewModel>(),
                 Status.SUCCESS -> {
                     LoadingScreen.hideLoading()
                     storyItemAdapter.submitList(it.data?.listStory)
+                    binding?.rvStory?.smoothScrollToPosition(0)
                 }
                 Status.ERROR -> {
                     LoadingScreen.hideLoading()

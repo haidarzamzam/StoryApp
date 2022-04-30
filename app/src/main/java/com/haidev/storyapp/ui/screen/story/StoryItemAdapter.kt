@@ -1,7 +1,12 @@
 package com.haidev.storyapp.ui.screen.story
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -9,20 +14,29 @@ import com.haidev.storyapp.data.model.StoryModel
 import com.haidev.storyapp.databinding.ItemRowStoryBinding
 
 class StoryItemAdapter(
-    private val listener: (StoryModel.Response.Story) -> Unit
+    private val context: Context
 ) :
     ListAdapter<StoryModel.Response.Story, StoryItemAdapter.ViewHolder>(DiffCallback()) {
 
     class ViewHolder private constructor(
         private val binding: ItemRowStoryBinding,
-        private val listener: (StoryModel.Response.Story) -> Unit
+        private val context: Context
     ) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: StoryModel.Response.Story) {
             binding.item = item
             itemView.setOnClickListener {
-                listener(item)
+                val intent = Intent(context, DetailStoryActivity::class.java)
+                intent.putExtra(DetailStoryActivity.EXTRA_DATA_STORY, item)
+                val optionsCompat: ActivityOptionsCompat =
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        itemView.context as Activity,
+                        Pair(binding.ivThumbnail, "thumbnail"),
+                        Pair(binding.tvTitle, "title"),
+                        Pair(binding.tvDesc, "desc"),
+                    )
+                context.startActivity(intent, optionsCompat.toBundle())
             }
             binding.executePendingBindings()
         }
@@ -30,17 +44,17 @@ class StoryItemAdapter(
         companion object {
             fun from(
                 parent: ViewGroup,
-                listener: (StoryModel.Response.Story) -> Unit
+                context: Context
             ): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ItemRowStoryBinding.inflate(layoutInflater, parent, false)
-                return ViewHolder(binding, listener)
+                return ViewHolder(binding, context)
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(parent, listener)
+        return ViewHolder.from(parent, context)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
