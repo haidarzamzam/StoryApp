@@ -3,6 +3,7 @@
     package="com.haidev.storyapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".MyApp"
         android:allowBackup="true"
@@ -11,6 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StoryApp">
+        <activity
+            android:name=".ui.screen.story.StoryActivity"
+            android:exported="true" />
         <activity
             android:name=".ui.screen.register.RegisterActivity"
             android:exported="true" />

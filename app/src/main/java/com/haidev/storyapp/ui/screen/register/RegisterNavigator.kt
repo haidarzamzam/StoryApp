@@ -1,3 +1,5 @@
 package com.haidev.storyapp.ui.screen.register
 
-interface RegisterNavigator
+interface RegisterNavigator {
+    fun goToLogin(isRegistered: Boolean)
+}

@@ -25,7 +25,7 @@ class RegisterViewModel(private val repository: StoryRepository, application: Ap
             } catch (t: Throwable) {
                 _responseRegister.postValue(
                     Resource.error(
-                        ErrorUtil.getErrorThrowableMsg(t),
+                        ErrorUtil.getServiceErrorMsg(t),
                         null,
                         t
                     )

@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
 import com.haidev.storyapp.di.apiRepositoryModule
+import com.haidev.storyapp.di.prefsModule
 import com.haidev.storyapp.di.remoteModule
 import com.haidev.storyapp.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
@@ -33,6 +34,7 @@ class MyApp : Application() {
                 listOf(
                     viewModelModule,
                     apiRepositoryModule,
+                    prefsModule,
                     remoteModule
                 )
             )

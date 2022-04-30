@@ -13,15 +13,15 @@ import android.view.View
 import android.widget.Toast
 import com.haidev.storyapp.R
 import com.haidev.storyapp.data.model.LoginModel
-import com.haidev.storyapp.data.model.Resource
 import com.haidev.storyapp.data.model.Status
 import com.haidev.storyapp.databinding.ActivityLoginBinding
+import com.haidev.storyapp.di.prefs
 import com.haidev.storyapp.ui.base.BaseActivity
 import com.haidev.storyapp.ui.custom.LoadingScreen
 import com.haidev.storyapp.ui.screen.register.RegisterActivity
+import com.haidev.storyapp.ui.screen.story.StoryActivity
 import com.haidev.storyapp.util.isValidEmail
 import com.haidev.storyapp.util.isValidPassword
-import com.haidev.storyapp.util.observe
 import org.koin.android.ext.android.inject
 
 
@@ -40,12 +40,15 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(),
         initUI()
     }
 
+    override fun setLayout(): Int = R.layout.activity_login
+
+    override fun getViewModels(): LoginViewModel = loginViewModel
+
     private fun initUI() {
         val ss = SpannableString("Don't have an account? Sign up")
         val clickSpan = object : ClickableSpan() {
             override fun onClick(widget: View) {
-                finish()
-                startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
+                goToRegister()
             }
 
             override fun updateDrawState(ds: TextPaint) {
@@ -58,7 +61,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(),
         ss.setSpan(clickSpan, 23, 30, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         binding?.tvSignup?.text = ss
         binding?.tvSignup?.movementMethod = LinkMovementMethod.getInstance()
+    }
 
+    override fun onReadyAction() {
         binding?.btnLogin?.setOnClickListener {
             if (!binding?.etEmail?.text.toString()
                     .isValidEmail() && !binding?.etPassword?.text.toString().isValidPassword()
@@ -70,31 +75,38 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(),
                     binding?.etPassword?.text.toString()
                 )
                 loginViewModel.postLogin(payload)
-                with(loginViewModel) {
-                    observe(responseLogin, ::handleLogin)
+            }
+        }
+    }
+
+    override fun onObserveAction() {
+        loginViewModel.responseLogin.observe(this, {
+            when (it?.status) {
+                Status.LOADING -> {
+                    LoadingScreen.displayLoadingWithText(this, "Checking User. . .", false)
                 }
+                Status.SUCCESS -> {
+                    LoadingScreen.hideLoading()
+                    prefs.prefUserToken = it.data?.loginResult?.token
+                    goToStory()
+                }
+                Status.ERROR -> {
+                    LoadingScreen.hideLoading()
+                    Toast.makeText(this, it.message.toString(), Toast.LENGTH_SHORT).show()
+                }
+                else -> LoadingScreen.hideLoading()
             }
-        }
+        })
+
     }
 
-    private fun handleLogin(it: Resource<LoginModel.Response>?) {
-        when (it?.status) {
-            Status.LOADING -> {
-                LoadingScreen.hideLoading()
-                LoadingScreen.displayLoadingWithText(this, "Checking User. . .", false)
-            }
-            Status.SUCCESS -> {
-                LoadingScreen.hideLoading()
-            }
-            Status.ERROR -> {
-                LoadingScreen.hideLoading()
-                Toast.makeText(this, it.throwable.toString(), Toast.LENGTH_SHORT).show()
-            }
-            else -> LoadingScreen.hideLoading()
-        }
+    override fun goToRegister() {
+        finish()
+        startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
     }
 
-    override fun setLayout(): Int = R.layout.activity_login
-
-    override fun getViewModels(): LoginViewModel = loginViewModel
+    override fun goToStory() {
+        finish()
+        startActivity(Intent(this@LoginActivity, StoryActivity::class.java))
+    }
 }

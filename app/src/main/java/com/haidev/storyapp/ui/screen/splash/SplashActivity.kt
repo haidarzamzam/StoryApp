@@ -6,6 +6,7 @@ import com.haidev.storyapp.R
 import com.haidev.storyapp.databinding.ActivitySplashBinding
 import com.haidev.storyapp.ui.base.BaseActivity
 import com.haidev.storyapp.ui.screen.login.LoginActivity
+import com.haidev.storyapp.ui.screen.story.StoryActivity
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
@@ -34,9 +35,13 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(),
         }
     }
 
-    override fun navigateToLogin() {
-        val intent = Intent(this@SplashActivity, LoginActivity::class.java)
-        startActivity(intent)
+    override fun goToLogin() {
         finish()
+        startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
+    }
+
+    override fun goToStory() {
+        finish()
+        startActivity(Intent(this@SplashActivity, StoryActivity::class.java))
     }
 }

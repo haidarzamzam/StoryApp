@@ -12,7 +12,6 @@ import android.view.View
 import android.widget.Toast
 import com.haidev.storyapp.R
 import com.haidev.storyapp.data.model.RegisterModel
-import com.haidev.storyapp.data.model.Resource
 import com.haidev.storyapp.data.model.Status
 import com.haidev.storyapp.databinding.ActivityRegisterBinding
 import com.haidev.storyapp.ui.base.BaseActivity
@@ -21,7 +20,6 @@ import com.haidev.storyapp.ui.screen.login.LoginActivity
 import com.haidev.storyapp.util.isValidEmail
 import com.haidev.storyapp.util.isValidName
 import com.haidev.storyapp.util.isValidPassword
-import com.haidev.storyapp.util.observe
 import org.koin.android.ext.android.inject
 
 class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel>(),
@@ -39,12 +37,15 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
         initUI()
     }
 
+    override fun setLayout(): Int = R.layout.activity_register
+
+    override fun getViewModels(): RegisterViewModel = registerViewModel
+
     private fun initUI() {
         val ss = SpannableString("Have an account? Log in")
         val clickSpan = object : ClickableSpan() {
             override fun onClick(widget: View) {
-                finish()
-                startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
+                goToLogin(false)
             }
 
             override fun updateDrawState(ds: TextPaint) {
@@ -57,7 +58,9 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
         ss.setSpan(clickSpan, 17, 23, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         binding?.tvSignup?.text = ss
         binding?.tvSignup?.movementMethod = LinkMovementMethod.getInstance()
+    }
 
+    override fun onReadyAction() {
         binding?.btnRegister?.setOnClickListener {
             if (!binding?.etEmail?.text.toString()
                     .isValidEmail() && !binding?.etName?.text.toString()
@@ -65,42 +68,44 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
             ) {
                 Toast.makeText(this, "Check your warning!", Toast.LENGTH_SHORT).show()
             } else {
-                postRegister()
+                val payload = RegisterModel.Payload(
+                    binding?.etEmail?.text.toString(),
+                    binding?.etName?.text.toString(),
+                    binding?.etPassword?.text.toString()
+                )
+                registerViewModel.postRegister(payload)
             }
         }
     }
 
-    private fun postRegister() {
-        val payload = RegisterModel.Payload(
-            binding?.etEmail?.text.toString(),
-            binding?.etName?.text.toString(),
-            binding?.etPassword?.text.toString()
-        )
-        registerViewModel.postRegister(payload)
-        with(registerViewModel) {
-            observe(responseRegister, ::handleRegister)
-        }
-    }
-
-    private fun handleRegister(it: Resource<RegisterModel.Response>?) {
-        when (it?.status) {
-            Status.LOADING -> {
-                LoadingScreen.hideLoading()
-                LoadingScreen.displayLoadingWithText(this, "Creating User. . .", false)
+    override fun onObserveAction() {
+        registerViewModel.responseRegister.observe(this, {
+            when (it?.status) {
+                Status.LOADING -> {
+                    LoadingScreen.hideLoading()
+                    LoadingScreen.displayLoadingWithText(this, "Creating User. . .", false)
+                }
+                Status.SUCCESS -> {
+                    LoadingScreen.hideLoading()
+                    goToLogin(true)
+                }
+                Status.ERROR -> {
+                    LoadingScreen.hideLoading()
+                    Toast.makeText(this, it.throwable.toString(), Toast.LENGTH_SHORT).show()
+                }
+                else -> LoadingScreen.hideLoading()
             }
-            Status.SUCCESS -> {
-                LoadingScreen.hideLoading()
-            }
-            Status.ERROR -> {
-                LoadingScreen.hideLoading()
-                Toast.makeText(this, it.throwable.toString(), Toast.LENGTH_SHORT).show()
-            }
-            else -> LoadingScreen.hideLoading()
-        }
+        })
     }
 
 
-    override fun setLayout(): Int = R.layout.activity_register
-
-    override fun getViewModels(): RegisterViewModel = registerViewModel
+    override fun goToLogin(isRegistered: Boolean) {
+        if (isRegistered) Toast.makeText(
+            this,
+            "Register successfully, please login!",
+            Toast.LENGTH_SHORT
+        ).show()
+        finish()
+        startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
+    }
 }

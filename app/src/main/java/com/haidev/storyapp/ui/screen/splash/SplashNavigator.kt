@@ -1,5 +1,6 @@
 package com.haidev.storyapp.ui.screen.splash
 
 interface SplashNavigator {
-    fun navigateToLogin()
+    fun goToLogin()
+    fun goToStory()
 }

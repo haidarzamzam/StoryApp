@@ -17,15 +17,15 @@ class LoginViewModel(private val repository: StoryRepository, application: Appli
         get() = _responseLogin
 
     fun postLogin(payload: LoginModel.Payload) {
+        _responseLogin.postValue(Resource.loading(null))
         viewModelScope.launch {
-            _responseLogin.postValue(Resource.loading(null))
             try {
                 val response = repository.postLogin(payload)
                 _responseLogin.postValue(Resource.success(response))
             } catch (t: Throwable) {
                 _responseLogin.postValue(
                     Resource.error(
-                        ErrorUtil.getErrorThrowableMsg(t),
+                        ErrorUtil.getServiceErrorMsg(t),
                         null,
                         t
                     )
