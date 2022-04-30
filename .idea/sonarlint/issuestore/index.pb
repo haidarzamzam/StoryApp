@@ -19,7 +19,5 @@ r
 Bapp/src/main/java/com/haidev/storyapp/ui/custom/MyEditTextEmail.kt,0/0/00b4f6185dc09a41a5acb99ca19173932df1704d
 o
 ?app/src/main/java/com/haidev/storyapp/util/ValidateFieldUtil.kt,2/5/25eb2d59863d67c73330472d4e6b56baaf09f18c
-f
-6app/src/main/java/com/haidev/storyapp/util/ViewUtil.kt,5/0/50649838cb96e8d43c96d654d32d7d23c85d323f
 k
 ;app/src/main/java/com/haidev/storyapp/ui/custom/MyDialog.kt,f/e/feeca56ecdc918a3b38c4770c8d18a81cc6f6e21

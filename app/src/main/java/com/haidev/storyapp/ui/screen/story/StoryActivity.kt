@@ -3,6 +3,7 @@ package com.haidev.storyapp.ui.screen.story
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.afollestad.materialdialogs.MaterialDialog
 import com.haidev.storyapp.R
 import com.haidev.storyapp.data.model.Status
@@ -20,6 +21,8 @@ class StoryActivity : BaseActivity<ActivityStoryBinding, StoryViewModel>(),
     private var _binding: ActivityStoryBinding? = null
     private val binding get() = _binding
 
+    private lateinit var storyItemAdapter: StoryItemAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = getViewDataBinding()
@@ -29,6 +32,13 @@ class StoryActivity : BaseActivity<ActivityStoryBinding, StoryViewModel>(),
     }
 
     private fun initUI() {
+        binding?.rvStory?.apply {
+            layoutManager = LinearLayoutManager(this@StoryActivity)
+            storyItemAdapter = StoryItemAdapter {
+            }
+            adapter = storyItemAdapter
+        }
+
         binding?.ivLogout?.setOnClickListener {
             MaterialDialog.Builder(this)
                 .title("Logout")
@@ -68,6 +78,7 @@ class StoryActivity : BaseActivity<ActivityStoryBinding, StoryViewModel>(),
                 }
                 Status.SUCCESS -> {
                     LoadingScreen.hideLoading()
+                    storyItemAdapter.submitList(it.data?.listStory)
                 }
                 Status.ERROR -> {
                     LoadingScreen.hideLoading()
