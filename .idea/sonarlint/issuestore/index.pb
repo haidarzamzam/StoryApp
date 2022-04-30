@@ -1,8 +1,6 @@
 
 n
 >app/src/main/java/com/haidev/storyapp/util/ContextProviders.kt,2/e/2e78b5addeab4f624171f17bab9f7722a4d6c38d
-m
-=app/src/main/java/com/haidev/storyapp/ui/base/BaseActivity.kt,2/1/2149c3cb15d8dc3185096828a79d2438d777125c
 n
 >app/src/main/java/com/haidev/storyapp/ui/base/BaseViewModel.kt,3/6/361bf14593db0db1d9573a9a1193f20e1dc8feff
 u

@@ -5,6 +5,7 @@ import com.haidev.storyapp.data.source.sharepref.PrefManager
 import com.haidev.storyapp.ui.screen.login.LoginViewModel
 import com.haidev.storyapp.ui.screen.register.RegisterViewModel
 import com.haidev.storyapp.ui.screen.splash.SplashViewModel
+import com.haidev.storyapp.ui.screen.story.DetailStoryViewModel
 import com.haidev.storyapp.ui.screen.story.StoryViewModel
 import com.haidev.storyapp.util.ContextProviders
 import org.koin.android.ext.koin.androidApplication
@@ -16,6 +17,7 @@ val viewModelModule = module {
     viewModel { LoginViewModel(get(), androidApplication()) }
     viewModel { RegisterViewModel(get(), androidApplication()) }
     viewModel { StoryViewModel(get(), androidApplication()) }
+    viewModel { DetailStoryViewModel(androidApplication()) }
 }
 
 val apiRepositoryModule = module {

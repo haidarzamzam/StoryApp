@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.afollestad.materialdialogs.MaterialDialog
 import com.haidev.storyapp.R
 import com.haidev.storyapp.data.model.Status
+import com.haidev.storyapp.data.model.StoryModel
 import com.haidev.storyapp.databinding.ActivityStoryBinding
 import com.haidev.storyapp.di.prefs
 import com.haidev.storyapp.ui.base.BaseActivity
@@ -35,6 +36,7 @@ class StoryActivity : BaseActivity<ActivityStoryBinding, StoryViewModel>(),
         binding?.rvStory?.apply {
             layoutManager = LinearLayoutManager(this@StoryActivity)
             storyItemAdapter = StoryItemAdapter {
+                goToDetailStory(it)
             }
             adapter = storyItemAdapter
         }
@@ -63,6 +65,12 @@ class StoryActivity : BaseActivity<ActivityStoryBinding, StoryViewModel>(),
     override fun goToLogin() {
         finish()
         startActivity(Intent(this@StoryActivity, LoginActivity::class.java))
+    }
+
+    override fun goToDetailStory(data: StoryModel.Response.Story) {
+        val intent = Intent(this@StoryActivity, DetailStoryActivity::class.java)
+        intent.putExtra(DetailStoryActivity.EXTRA_DATA_STORY, data)
+        startActivity(intent)
     }
 
     override fun onReadyAction() {
