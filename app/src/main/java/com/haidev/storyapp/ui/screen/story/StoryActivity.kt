@@ -1,8 +1,10 @@
 package com.haidev.storyapp.ui.screen.story
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.afollestad.materialdialogs.MaterialDialog
 import com.haidev.storyapp.R
@@ -56,6 +58,10 @@ class StoryActivity : BaseActivity<ActivityStoryBinding, StoryViewModel>(),
                 .show()
 
         }
+
+        binding?.fabAddStory?.setOnClickListener {
+            goToAddStory()
+        }
     }
 
     override fun setLayout(): Int = R.layout.activity_story
@@ -73,6 +79,18 @@ class StoryActivity : BaseActivity<ActivityStoryBinding, StoryViewModel>(),
         startActivity(intent)
     }
 
+    override fun goToAddStory() {
+        val intent = Intent(this@StoryActivity, AddStoryActivity::class.java)
+        resultLauncher.launch(intent)
+    }
+
+    var resultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                storyViewModel.getStory()
+            }
+        }
+
     override fun onReadyAction() {
         storyViewModel.getStory()
     }
@@ -82,7 +100,7 @@ class StoryActivity : BaseActivity<ActivityStoryBinding, StoryViewModel>(),
             when (it?.status) {
                 Status.LOADING -> {
                     LoadingScreen.hideLoading()
-                    LoadingScreen.displayLoadingWithText(this, "Load Story. . .", false)
+                    LoadingScreen.displayLoadingWithText(this, "Load stories. . .", false)
                 }
                 Status.SUCCESS -> {
                     LoadingScreen.hideLoading()

@@ -83,7 +83,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
             when (it?.status) {
                 Status.LOADING -> {
                     LoadingScreen.hideLoading()
-                    LoadingScreen.displayLoadingWithText(this, "Creating User. . .", false)
+                    LoadingScreen.displayLoadingWithText(this, "Creating user. . .", false)
                 }
                 Status.SUCCESS -> {
                     LoadingScreen.hideLoading()

@@ -15,8 +15,13 @@
         <item name="android:fontFamily">@font/google_sans_regular</item>
     </style>
 
-    <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+    <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <item name="boxStrokeColor">#fff</item>
         <item name="boxStrokeWidth">2dp</item>
+    </style>
+
+    <style name="MyTextInputLayout_overlay">
+        <item name="colorOnSurface">#fff</item>
+        <item name="colorPrimary">#fff</item>
     </style>
 </resources>

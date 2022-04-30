@@ -3,8 +3,6 @@ n
 >app/src/main/java/com/haidev/storyapp/util/ContextProviders.kt,2/e/2e78b5addeab4f624171f17bab9f7722a4d6c38d
 n
 >app/src/main/java/com/haidev/storyapp/ui/base/BaseViewModel.kt,3/6/361bf14593db0db1d9573a9a1193f20e1dc8feff
-u
-Eapp/src/main/java/com/haidev/storyapp/data/source/remote/ApiClient.kt,f/f/ffa229b404f1b7a9debb18ff3651f6bbdd9314b1
 q
 Aapp/src/main/java/com/haidev/storyapp/data/model/RegisterModel.kt,7/f/7ff0230fa636896e4d7043f85d46fe4e83857ab1
 h
@@ -17,5 +15,3 @@ r
 Bapp/src/main/java/com/haidev/storyapp/ui/custom/MyEditTextEmail.kt,0/0/00b4f6185dc09a41a5acb99ca19173932df1704d
 o
 ?app/src/main/java/com/haidev/storyapp/util/ValidateFieldUtil.kt,2/5/25eb2d59863d67c73330472d4e6b56baaf09f18c
-k
-;app/src/main/java/com/haidev/storyapp/ui/custom/MyDialog.kt,f/e/feeca56ecdc918a3b38c4770c8d18a81cc6f6e21

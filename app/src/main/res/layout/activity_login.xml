@@ -61,6 +61,7 @@
                 android:hint="Email"
                 android:textColorHint="@color/white_hint"
                 app:boxStrokeColor="@color/white"
+                android:theme="@style/TextInputLayoutStyle"
                 app:hintTextColor="@color/white">
 
                 <com.haidev.storyapp.ui.custom.MyEditTextEmail

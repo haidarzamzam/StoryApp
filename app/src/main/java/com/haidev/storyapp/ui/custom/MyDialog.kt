@@ -9,12 +9,13 @@ import android.widget.TextView
 import com.haidev.storyapp.R
 
 object LoadingScreen {
-    private var dialog: Dialog? = null //obj
+    private var dialog: Dialog? = null
     fun displayLoadingWithText(
         context: Context?,
         text: String?,
         isCancelable: Boolean
     ) {
+        hideLoading()
         dialog = Dialog(context!!)
         dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog?.setContentView(R.layout.custom_loading)

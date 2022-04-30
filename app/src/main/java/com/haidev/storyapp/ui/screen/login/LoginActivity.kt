@@ -83,7 +83,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(),
         loginViewModel.responseLogin.observe(this, {
             when (it?.status) {
                 Status.LOADING -> {
-                    LoadingScreen.displayLoadingWithText(this, "Checking User. . .", false)
+                    LoadingScreen.displayLoadingWithText(this, "Checking user. . .", false)
                 }
                 Status.SUCCESS -> {
                     LoadingScreen.hideLoading()
