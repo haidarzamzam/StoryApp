@@ -2,10 +2,14 @@ package com.haidev.storyapp.ui.screen.story
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
+import com.afollestad.materialdialogs.MaterialDialog
 import com.haidev.storyapp.R
+import com.haidev.storyapp.data.model.Status
 import com.haidev.storyapp.databinding.ActivityStoryBinding
 import com.haidev.storyapp.di.prefs
 import com.haidev.storyapp.ui.base.BaseActivity
+import com.haidev.storyapp.ui.custom.LoadingScreen
 import com.haidev.storyapp.ui.screen.login.LoginActivity
 import org.koin.android.ext.android.inject
 
@@ -26,8 +30,19 @@ class StoryActivity : BaseActivity<ActivityStoryBinding, StoryViewModel>(),
 
     private fun initUI() {
         binding?.ivLogout?.setOnClickListener {
-            prefs.prefUserToken = ""
-            goToLogin()
+            MaterialDialog.Builder(this)
+                .title("Logout")
+                .content("Are you sure you want to logout the app?")
+                .cancelable(false)
+                .positiveText("Yes")
+                .onPositive { _, _ ->
+                    prefs.prefUserToken = ""
+                    goToLogin()
+                }
+                .negativeText("No")
+                .onNegative { dialog, _ -> dialog.dismiss() }
+                .show()
+
         }
     }
 
@@ -38,5 +53,28 @@ class StoryActivity : BaseActivity<ActivityStoryBinding, StoryViewModel>(),
     override fun goToLogin() {
         finish()
         startActivity(Intent(this@StoryActivity, LoginActivity::class.java))
+    }
+
+    override fun onReadyAction() {
+        storyViewModel.getStory()
+    }
+
+    override fun onObserveAction() {
+        storyViewModel.responseStory.observe(this, {
+            when (it?.status) {
+                Status.LOADING -> {
+                    LoadingScreen.hideLoading()
+                    LoadingScreen.displayLoadingWithText(this, "Load Story. . .", false)
+                }
+                Status.SUCCESS -> {
+                    LoadingScreen.hideLoading()
+                }
+                Status.ERROR -> {
+                    LoadingScreen.hideLoading()
+                    Toast.makeText(this, it.throwable.toString(), Toast.LENGTH_SHORT).show()
+                }
+                else -> LoadingScreen.hideLoading()
+            }
+        })
     }
 }

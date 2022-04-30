@@ -87,7 +87,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(),
                 }
                 Status.SUCCESS -> {
                     LoadingScreen.hideLoading()
-                    prefs.prefUserToken = it.data?.loginResult?.token
+                    prefs.prefUserToken = "Bearer ${it.data?.loginResult?.token}"
                     goToStory()
                 }
                 Status.ERROR -> {
