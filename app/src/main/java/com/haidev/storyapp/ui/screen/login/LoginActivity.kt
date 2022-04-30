@@ -10,10 +10,18 @@ import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
+import android.widget.Toast
 import com.haidev.storyapp.R
+import com.haidev.storyapp.data.model.LoginModel
+import com.haidev.storyapp.data.model.Resource
+import com.haidev.storyapp.data.model.Status
 import com.haidev.storyapp.databinding.ActivityLoginBinding
 import com.haidev.storyapp.ui.base.BaseActivity
+import com.haidev.storyapp.ui.custom.LoadingScreen
 import com.haidev.storyapp.ui.screen.register.RegisterActivity
+import com.haidev.storyapp.util.isValidEmail
+import com.haidev.storyapp.util.isValidPassword
+import com.haidev.storyapp.util.observe
 import org.koin.android.ext.android.inject
 
 
@@ -50,6 +58,40 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(),
         ss.setSpan(clickSpan, 23, 30, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         binding?.tvSignup?.text = ss
         binding?.tvSignup?.movementMethod = LinkMovementMethod.getInstance()
+
+        binding?.btnLogin?.setOnClickListener {
+            if (!binding?.etEmail?.text.toString()
+                    .isValidEmail() && !binding?.etPassword?.text.toString().isValidPassword()
+            ) {
+                Toast.makeText(this, "Check your warning!", Toast.LENGTH_SHORT).show()
+            } else {
+                val payload = LoginModel.Payload(
+                    binding?.etEmail?.text.toString(),
+                    binding?.etPassword?.text.toString()
+                )
+                loginViewModel.postLogin(payload)
+                with(loginViewModel) {
+                    observe(responseLogin, ::handleLogin)
+                }
+            }
+        }
+    }
+
+    private fun handleLogin(it: Resource<LoginModel.Response>?) {
+        when (it?.status) {
+            Status.LOADING -> {
+                LoadingScreen.hideLoading()
+                LoadingScreen.displayLoadingWithText(this, "Checking User. . .", false)
+            }
+            Status.SUCCESS -> {
+                LoadingScreen.hideLoading()
+            }
+            Status.ERROR -> {
+                LoadingScreen.hideLoading()
+                Toast.makeText(this, it.throwable.toString(), Toast.LENGTH_SHORT).show()
+            }
+            else -> LoadingScreen.hideLoading()
+        }
     }
 
     override fun setLayout(): Int = R.layout.activity_login

@@ -1,5 +1,6 @@
 package com.haidev.storyapp.di
 
+import com.haidev.storyapp.data.source.repository.StoryRepository
 import com.haidev.storyapp.ui.screen.login.LoginViewModel
 import com.haidev.storyapp.ui.screen.register.RegisterViewModel
 import com.haidev.storyapp.ui.screen.splash.SplashViewModel
@@ -10,10 +11,11 @@ import org.koin.dsl.module
 
 val viewModelModule = module {
     viewModel { SplashViewModel(androidApplication()) }
-    viewModel { LoginViewModel(androidApplication()) }
-    viewModel { RegisterViewModel(androidApplication()) }
+    viewModel { LoginViewModel(get(), androidApplication()) }
+    viewModel { RegisterViewModel(get(), androidApplication()) }
 }
 
 val apiRepositoryModule = module {
     single { ContextProviders.getInstance() }
+    single { StoryRepository(get()) }
 }

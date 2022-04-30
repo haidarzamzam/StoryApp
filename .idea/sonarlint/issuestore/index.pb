@@ -1,3 +1,21 @@
 
-Y
-)app/src/main/res/layout/activity_main.xml,7/6/76b07e40f24cce093536731477540f12e7da3cb6
+n
+>app/src/main/java/com/haidev/storyapp/util/ContextProviders.kt,2/e/2e78b5addeab4f624171f17bab9f7722a4d6c38d
+m
+=app/src/main/java/com/haidev/storyapp/ui/base/BaseActivity.kt,2/1/2149c3cb15d8dc3185096828a79d2438d777125c
+n
+>app/src/main/java/com/haidev/storyapp/ui/base/BaseViewModel.kt,3/6/361bf14593db0db1d9573a9a1193f20e1dc8feff
+^
+.app/src/main/java/com/haidev/storyapp/MyApp.kt,4/d/4dcfc671768765efd5294c84d01f9fce5970e044
+y
+Iapp/src/main/java/com/haidev/storyapp/ui/screen/splash/SplashNavigator.kt,d/7/d7b9c894d51191b1400c60732c959908d7dad122
+w
+Gapp/src/main/java/com/haidev/storyapp/ui/screen/login/LoginNavigator.kt,e/3/e33cb3a6de63d4ea30729fb7ad13f9b9cbb0cbaa
+y
+Iapp/src/main/java/com/haidev/storyapp/ui/screen/splash/SplashViewModel.kt,9/c/9c2414eb13bdc242f3f84f5f5c8eb090c7cc3a8a
+}
+Mapp/src/main/java/com/haidev/storyapp/ui/screen/register/RegisterNavigator.kt,8/f/8ffb03e5900c37c73976f3cfa473fc46a31e4817
+x
+Happ/src/main/java/com/haidev/storyapp/ui/screen/splash/SplashActivity.kt,5/9/590bdeefd3622c14ac705af7183bbd41972bf1aa
+u
+Eapp/src/main/java/com/haidev/storyapp/data/source/remote/ApiClient.kt,f/f/ffa229b404f1b7a9debb18ff3651f6bbdd9314b1

@@ -4,8 +4,8 @@ import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
-import android.util.Patterns
 import androidx.appcompat.widget.AppCompatEditText
+import com.haidev.storyapp.util.isValidEmail
 
 class MyEditTextEmail : AppCompatEditText {
     private fun init() {
@@ -19,8 +19,6 @@ class MyEditTextEmail : AppCompatEditText {
             }
 
             override fun afterTextChanged(s: Editable) {
-                fun CharSequence?.isValidEmail() =
-                    !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
                 error = if (!s.isValidEmail()) "Email must be correct" else null
             }
         })

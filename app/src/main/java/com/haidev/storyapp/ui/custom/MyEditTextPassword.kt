@@ -5,6 +5,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatEditText
+import com.haidev.storyapp.util.isValidPassword
 
 class MyEditTextPassword : AppCompatEditText {
     private fun init() {
@@ -18,7 +19,7 @@ class MyEditTextPassword : AppCompatEditText {
             }
 
             override fun afterTextChanged(s: Editable) {
-                error = if (s.toString().length < 6) "Password at least 6 character" else null
+                error = if (!s.isValidPassword()) "Password at least 6 character" else null
             }
         })
     }

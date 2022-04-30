@@ -5,6 +5,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatEditText
+import com.haidev.storyapp.util.isValidName
 
 class MyEditTextName : AppCompatEditText {
     private fun init() {
@@ -18,8 +19,6 @@ class MyEditTextName : AppCompatEditText {
             }
 
             override fun afterTextChanged(s: Editable) {
-                fun CharSequence?.isValidName() =
-                    !isNullOrEmpty() && Regex("^[A-Za-z]+\$").matches(this)
                 error = if (!s.isValidName()) "Name must be alphabetic" else null
             }
         })
