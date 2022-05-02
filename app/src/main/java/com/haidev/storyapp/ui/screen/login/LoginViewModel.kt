@@ -5,12 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.haidev.storyapp.data.model.LoginModel
 import com.haidev.storyapp.data.model.Resource
-import com.haidev.storyapp.data.source.repository.StoryRepository
+import com.haidev.storyapp.data.source.repository.UserRepository
 import com.haidev.storyapp.ui.base.BaseViewModel
 import com.haidev.storyapp.util.ErrorUtil
 import kotlinx.coroutines.launch
 
-class LoginViewModel(private val repository: StoryRepository, application: Application) :
+class LoginViewModel(private val repository: UserRepository, application: Application) :
     BaseViewModel<LoginNavigator>(application) {
     private val _responseLogin = MutableLiveData<Resource<LoginModel.Response>>()
     val responseLogin: MutableLiveData<Resource<LoginModel.Response>>

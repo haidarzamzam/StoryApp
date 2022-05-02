@@ -1,4 +1,4 @@
-package com.haidev.storyapp.data.source.sharepref
+package com.haidev.storyapp.data.source.local.sharepref
 
 import android.content.Context
 import com.haidev.storyapp.MyApp

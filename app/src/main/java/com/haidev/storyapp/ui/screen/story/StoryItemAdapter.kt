@@ -7,8 +7,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.haidev.storyapp.data.model.StoryModel
 import com.haidev.storyapp.databinding.ItemRowStoryBinding
@@ -16,7 +16,7 @@ import com.haidev.storyapp.databinding.ItemRowStoryBinding
 class StoryItemAdapter(
     private val context: Context
 ) :
-    ListAdapter<StoryModel.Response.Story, StoryItemAdapter.ViewHolder>(DiffCallback()) {
+    PagingDataAdapter<StoryModel.Response.Story, StoryItemAdapter.ViewHolder>(DiffCallback()) {
 
     class ViewHolder private constructor(
         private val binding: ItemRowStoryBinding,
@@ -59,7 +59,9 @@ class StoryItemAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+        if (item != null) {
+            holder.bind(item)
+        }
     }
 
     class DiffCallback : DiffUtil.ItemCallback<StoryModel.Response.Story>() {

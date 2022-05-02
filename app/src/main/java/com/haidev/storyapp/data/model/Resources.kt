@@ -18,14 +18,11 @@ data class Resource<out T>(
         fun <T> loading(data: T? = null): Resource<T> {
             return Resource(Status.LOADING, data, null, null)
         }
-
-        fun <T> empty(): Resource<T> = Resource(Status.EMPTY, null, null, null)
     }
 }
 
 enum class Status {
     SUCCESS,
     ERROR,
-    EMPTY,
     LOADING
 }

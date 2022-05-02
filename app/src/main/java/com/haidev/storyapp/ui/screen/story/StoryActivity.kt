@@ -3,17 +3,16 @@ package com.haidev.storyapp.ui.screen.story
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
+import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.afollestad.materialdialogs.MaterialDialog
 import com.haidev.storyapp.R
-import com.haidev.storyapp.data.model.Status
 import com.haidev.storyapp.databinding.ActivityStoryBinding
 import com.haidev.storyapp.di.prefs
 import com.haidev.storyapp.ui.base.BaseActivity
-import com.haidev.storyapp.ui.custom.LoadingScreen
 import com.haidev.storyapp.ui.screen.login.LoginActivity
+import com.haidev.storyapp.util.LoadingStateAdapter
 import org.koin.android.ext.android.inject
 
 class StoryActivity : BaseActivity<ActivityStoryBinding, StoryViewModel>(),
@@ -29,17 +28,17 @@ class StoryActivity : BaseActivity<ActivityStoryBinding, StoryViewModel>(),
         super.onCreate(savedInstanceState)
         _binding = getViewDataBinding()
         binding?.lifecycleOwner = this
-        storyViewModel.navigator = this
         initUI()
     }
 
     private fun initUI() {
-        binding?.rvStory?.apply {
-            layoutManager = LinearLayoutManager(this@StoryActivity)
-            storyItemAdapter = StoryItemAdapter(context)
-            adapter = storyItemAdapter
-        }
-
+        storyItemAdapter = StoryItemAdapter(this)
+        binding?.rvStory?.layoutManager = LinearLayoutManager(this)
+        binding?.rvStory?.adapter = storyItemAdapter.withLoadStateFooter(
+            footer = LoadingStateAdapter {
+                storyItemAdapter.retry()
+            }
+        )
         binding?.ivLogout?.setOnClickListener {
             MaterialDialog.Builder(this)
                 .title("Logout")
@@ -75,37 +74,17 @@ class StoryActivity : BaseActivity<ActivityStoryBinding, StoryViewModel>(),
         resultLauncher.launch(intent)
     }
 
-    var resultLauncher =
+    private var resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-                storyViewModel.getStory()
+                //getData()
             }
         }
 
-    override fun onReadyAction() {
-        storyViewModel.getStory()
-    }
-
     override fun onObserveAction() {
         storyViewModel.responseStory.observe(this, {
-            when (it?.status) {
-                Status.LOADING ->
-                    LoadingScreen.displayLoadingWithText(this, "Load stories. . .", false)
-                Status.SUCCESS -> {
-                    LoadingScreen.hideLoading()
-                    storyItemAdapter.submitList(it.data?.listStory)
-                    binding?.rvStory?.smoothScrollToPosition(0)
-                }
-                Status.ERROR -> {
-                    LoadingScreen.hideLoading()
-                    Toast.makeText(this, it.throwable.toString(), Toast.LENGTH_SHORT).show()
-                }
-                Status.EMPTY -> {
-                    LoadingScreen.hideLoading()
-                    Toast.makeText(this, "No data", Toast.LENGTH_SHORT).show()
-                }
-                else -> LoadingScreen.hideLoading()
-            }
+            Log.d("CHECKK", it.toString())
+            storyItemAdapter.submitData(lifecycle, it)
         })
     }
 }

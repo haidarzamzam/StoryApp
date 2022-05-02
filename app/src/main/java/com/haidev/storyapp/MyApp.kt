@@ -3,10 +3,7 @@ package com.haidev.storyapp
 import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
-import com.haidev.storyapp.di.apiRepositoryModule
-import com.haidev.storyapp.di.prefsModule
-import com.haidev.storyapp.di.remoteModule
-import com.haidev.storyapp.di.viewModelModule
+import com.haidev.storyapp.di.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -35,7 +32,8 @@ class MyApp : Application() {
                     viewModelModule,
                     apiRepositoryModule,
                     prefsModule,
-                    remoteModule
+                    remoteModule,
+                    localModule
                 )
             )
         }

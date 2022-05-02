@@ -1,7 +1,8 @@
 package com.haidev.storyapp.di
 
+import com.haidev.storyapp.data.source.local.sharepref.PrefManager
 import com.haidev.storyapp.data.source.repository.StoryRepository
-import com.haidev.storyapp.data.source.sharepref.PrefManager
+import com.haidev.storyapp.data.source.repository.UserRepository
 import com.haidev.storyapp.ui.screen.login.LoginViewModel
 import com.haidev.storyapp.ui.screen.register.RegisterViewModel
 import com.haidev.storyapp.ui.screen.splash.SplashViewModel
@@ -24,7 +25,8 @@ val viewModelModule = module {
 
 val apiRepositoryModule = module {
     single { ContextProviders.getInstance() }
-    single { StoryRepository(get()) }
+    single { UserRepository(get()) }
+    single { StoryRepository(get(), get()) }
 }
 
 val prefsModule = module {

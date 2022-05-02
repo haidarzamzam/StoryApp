@@ -1,6 +1,8 @@
 package com.haidev.storyapp.data.model
 
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
 object StoryModel {
@@ -11,10 +13,12 @@ object StoryModel {
         val message: String
     ) : Parcelable {
         @Parcelize
+        @Entity(tableName = "story")
         data class Story(
+            @PrimaryKey
+            val id: String,
             val createdAt: String?,
             val description: String?,
-            val id: String?,
             val lat: Double?,
             val lon: Double?,
             val name: String?,

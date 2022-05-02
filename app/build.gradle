@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.haidev.storyapp"
-        minSdk 21
+        minSdk 26
         targetSdk 31
         versionCode 1
         versionName "1.0"
@@ -92,6 +92,14 @@ dependencies {
     implementation "com.squareup.moshi:moshi:1.11.0"
     implementation "com.squareup.moshi:moshi-kotlin:1.11.0"
     implementation 'com.google.code.gson:gson:2.8.8'
+
+    //Room
+    implementation 'androidx.room:room-ktx:2.5.0-alpha01'
+    kapt 'androidx.room:room-compiler:2.5.0-alpha01'
+
+    //Paging
+    implementation "androidx.paging:paging-runtime-ktx:3.1.1"
+    implementation 'androidx.room:room-paging:2.5.0-alpha01'
 
     //Testing
     testImplementation 'junit:junit:4.+'

@@ -5,12 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.haidev.storyapp.data.model.RegisterModel
 import com.haidev.storyapp.data.model.Resource
-import com.haidev.storyapp.data.source.repository.StoryRepository
+import com.haidev.storyapp.data.source.repository.UserRepository
 import com.haidev.storyapp.ui.base.BaseViewModel
 import com.haidev.storyapp.util.ErrorUtil
 import kotlinx.coroutines.launch
 
-class RegisterViewModel(private val repository: StoryRepository, application: Application) :
+class RegisterViewModel(private val repository: UserRepository, application: Application) :
     BaseViewModel<RegisterNavigator>(application) {
     private val _responseRegister = MutableLiveData<Resource<RegisterModel.Response>>()
     val responseRegister: MutableLiveData<Resource<RegisterModel.Response>>
