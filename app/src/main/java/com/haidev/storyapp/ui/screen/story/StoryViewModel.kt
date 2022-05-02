@@ -21,7 +21,11 @@ class StoryViewModel(private val repository: StoryRepository, application: Appli
             _responseStory.postValue(Resource.loading(null))
             try {
                 val response = repository.getStory()
-                _responseStory.postValue(Resource.success(response))
+                if (response.listStory.isNullOrEmpty()) {
+                    _responseStory.postValue(Resource.empty())
+                } else {
+                    _responseStory.postValue(Resource.success(response))
+                }
             } catch (t: Throwable) {
                 _responseStory.postValue(
                     Resource.error(

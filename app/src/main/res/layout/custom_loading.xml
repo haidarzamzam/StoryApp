@@ -33,5 +33,5 @@
         app:layout_constraintBottom_toBottomOf="@id/pb_loading"
         app:layout_constraintStart_toEndOf="@id/pb_loading"
         app:layout_constraintTop_toTopOf="@id/pb_loading"
-        tools:text="Loading . . ." />
+        tools:text="@string/loading" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -81,10 +81,8 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
     override fun onObserveAction() {
         registerViewModel.responseRegister.observe(this, {
             when (it?.status) {
-                Status.LOADING -> {
-                    LoadingScreen.hideLoading()
+                Status.LOADING ->
                     LoadingScreen.displayLoadingWithText(this, "Creating user. . .", false)
-                }
                 Status.SUCCESS -> {
                     LoadingScreen.hideLoading()
                     goToLogin(true)

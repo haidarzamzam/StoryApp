@@ -89,10 +89,8 @@ class StoryActivity : BaseActivity<ActivityStoryBinding, StoryViewModel>(),
     override fun onObserveAction() {
         storyViewModel.responseStory.observe(this, {
             when (it?.status) {
-                Status.LOADING -> {
-                    LoadingScreen.hideLoading()
+                Status.LOADING ->
                     LoadingScreen.displayLoadingWithText(this, "Load stories. . .", false)
-                }
                 Status.SUCCESS -> {
                     LoadingScreen.hideLoading()
                     storyItemAdapter.submitList(it.data?.listStory)
@@ -101,6 +99,10 @@ class StoryActivity : BaseActivity<ActivityStoryBinding, StoryViewModel>(),
                 Status.ERROR -> {
                     LoadingScreen.hideLoading()
                     Toast.makeText(this, it.throwable.toString(), Toast.LENGTH_SHORT).show()
+                }
+                Status.EMPTY -> {
+                    LoadingScreen.hideLoading()
+                    Toast.makeText(this, "No data", Toast.LENGTH_SHORT).show()
                 }
                 else -> LoadingScreen.hideLoading()
             }

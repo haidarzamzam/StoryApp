@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.screen.story.AddStoryActivity">
@@ -33,6 +34,7 @@
                     android:id="@+id/iv_logo"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:contentDescription="@string/logo_storyapp"
                     android:src="@drawable/img_logo" />
 
                 <TextView
@@ -42,7 +44,7 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="8dp"
                     android:fontFamily="@font/google_sans_bold"
-                    android:text="Add Story"
+                    android:text="@string/add_story"
                     android:textColor="@color/white" />
             </LinearLayout>
 
@@ -51,6 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
+                android:contentDescription="@string/logo_back_storyapp"
                 android:padding="14dp"
                 android:src="@drawable/ic_baseline_arrow_back_24" />
         </Toolbar>
@@ -68,6 +71,7 @@
                 android:id="@+id/iv_thumbnail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:contentDescription="@string/image_thumbnail_storyapp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/img_no_image" />
         </androidx.cardview.widget.CardView>
@@ -82,7 +86,7 @@
             android:layout_marginBottom="32dp"
             android:backgroundTint="@color/color_primary_dark"
             android:fontFamily="@font/google_sans_bold"
-            android:text="Upload Camera"
+            android:text="@string/upload_camera"
             android:textAllCaps="false"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
@@ -99,7 +103,7 @@
             android:layout_marginBottom="32dp"
             android:backgroundTint="@color/color_primary_dark"
             android:fontFamily="@font/google_sans_bold"
-            android:text="Upload Gallery"
+            android:text="@string/upload_gallery"
             android:textAllCaps="false"
             android:textColor="@color/white"
             app:layout_constraintEnd_toStartOf="@id/btn_upload_camera"
@@ -112,7 +116,7 @@
             android:layout_height="0dp"
             android:layout_marginHorizontal="32dp"
             android:layout_marginVertical="16dp"
-            android:hint="Description"
+            android:hint="@string/description"
             android:textColorHint="@color/black_hint"
             android:theme="@style/TextInputLayoutStyle"
             app:boxStrokeColor="@color/text_input_layout_stroke_color"
@@ -136,7 +140,7 @@
             android:layout_marginBottom="32dp"
             android:backgroundTint="@color/color_primary_dark"
             android:fontFamily="@font/google_sans_bold"
-            android:text="Upload"
+            android:text="@string/upload"
             android:textAllCaps="false"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent" />

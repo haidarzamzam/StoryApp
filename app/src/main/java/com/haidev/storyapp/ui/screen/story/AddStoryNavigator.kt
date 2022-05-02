@@ -1,3 +1,5 @@
 package com.haidev.storyapp.ui.screen.story
 
-interface AddStoryNavigator
+interface AddStoryNavigator {
+    fun backToHome()
+}

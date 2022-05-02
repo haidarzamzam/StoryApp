@@ -82,9 +82,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(),
     override fun onObserveAction() {
         loginViewModel.responseLogin.observe(this, {
             when (it?.status) {
-                Status.LOADING -> {
+                Status.LOADING ->
                     LoadingScreen.displayLoadingWithText(this, "Checking user. . .", false)
-                }
                 Status.SUCCESS -> {
                     LoadingScreen.hideLoading()
                     prefs.prefUserToken = "Bearer ${it.data?.loginResult?.token}"
@@ -97,7 +96,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(),
                 else -> LoadingScreen.hideLoading()
             }
         })
-
     }
 
     override fun goToRegister() {

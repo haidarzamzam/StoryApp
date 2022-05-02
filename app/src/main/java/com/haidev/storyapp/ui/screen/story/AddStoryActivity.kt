@@ -88,15 +88,12 @@ class AddStoryActivity : BaseActivity<ActivityAddStoryBinding, AddStoryViewModel
     override fun onObserveAction() {
         addStoryViewModel.responseAddStory.observe(this, {
             when (it?.status) {
-                Status.LOADING -> {
+                Status.LOADING ->
                     LoadingScreen.displayLoadingWithText(this, "Upload story. . .", false)
-                }
                 Status.SUCCESS -> {
                     LoadingScreen.hideLoading()
                     Toast.makeText(this, "Upload story success", Toast.LENGTH_SHORT).show()
-                    val intent = Intent()
-                    setResult(Activity.RESULT_OK, intent)
-                    finish()
+                    backToHome()
                 }
                 Status.ERROR -> {
                     LoadingScreen.hideLoading()
@@ -177,5 +174,11 @@ class AddStoryActivity : BaseActivity<ActivityAddStoryBinding, AddStoryViewModel
             fileImage = uriToFile(selectedImg, this@AddStoryActivity)
             binding?.ivThumbnail?.setImageURI(selectedImg)
         }
+    }
+
+    override fun backToHome() {
+        val intent = Intent()
+        setResult(Activity.RESULT_OK, intent)
+        finish()
     }
 }
