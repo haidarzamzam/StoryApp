@@ -8,7 +8,8 @@ import com.haidev.storyapp.ui.screen.register.RegisterViewModel
 import com.haidev.storyapp.ui.screen.splash.SplashViewModel
 import com.haidev.storyapp.ui.screen.story.AddStoryViewModel
 import com.haidev.storyapp.ui.screen.story.DetailStoryViewModel
-import com.haidev.storyapp.ui.screen.story.StoryViewModel
+import com.haidev.storyapp.ui.screen.story.ParentStoryViewModel
+import com.haidev.storyapp.ui.screen.story.StoryListViewModel
 import com.haidev.storyapp.util.ContextProviders
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -18,7 +19,8 @@ val viewModelModule = module {
     viewModel { SplashViewModel(androidApplication()) }
     viewModel { LoginViewModel(get(), androidApplication()) }
     viewModel { RegisterViewModel(get(), androidApplication()) }
-    viewModel { StoryViewModel(get(), androidApplication()) }
+    viewModel { ParentStoryViewModel(androidApplication()) }
+    viewModel { StoryListViewModel(get(), androidApplication()) }
     viewModel { DetailStoryViewModel(androidApplication()) }
     viewModel { AddStoryViewModel(get(), androidApplication()) }
 }

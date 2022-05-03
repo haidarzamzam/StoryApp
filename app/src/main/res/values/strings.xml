@@ -22,4 +22,7 @@
     <string name="image_thumbnail_storyapp">Image Thumbnail StoryApp</string>
     <string name="logo_logout_storyapp">Logo Logout StoryApp</string>
     <string name="retry">Retry</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="logo_add_storyapp">Logo Add StoryApp</string>
 </resources>

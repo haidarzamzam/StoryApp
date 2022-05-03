@@ -5,18 +5,26 @@
       <map>
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/bg_rounded.xml" value="0.21296296296296297" />
+        <entry key="app/src/main/res/drawable/ic_baseline_info_24.xml" value="0.2553846153846154" />
+        <entry key="app/src/main/res/drawable/ic_baseline_map_24.xml" value="0.27395833333333336" />
         <entry key="app/src/main/res/drawable/ic_baseline_post_add_24.xml" value="0.27395833333333336" />
+        <entry key="app/src/main/res/drawable/ic_baseline_view_list_24.xml" value="0.27395833333333336" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_add_story.xml" value="0.24375" />
+        <entry key="app/src/main/res/layout/activity_check.xml" value="0.2578125" />
         <entry key="app/src/main/res/layout/activity_detail_story.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.17083333333333334" />
+        <entry key="app/src/main/res/layout/activity_parent_story.xml" value="0.21944444444444444" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.2578125" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.165" />
-        <entry key="app/src/main/res/layout/activity_story.xml" value="0.2578125" />
+        <entry key="app/src/main/res/layout/activity_story.xml" value="0.25" />
         <entry key="app/src/main/res/layout/custom_loading.xml" value="0.2578125" />
+        <entry key="app/src/main/res/layout/fragment_story_list.xml" value="0.2578125" />
+        <entry key="app/src/main/res/layout/fragment_story_map.xml" value="0.24375" />
         <entry key="app/src/main/res/layout/item_loading.xml" value="0.2578125" />
         <entry key="app/src/main/res/layout/item_row_story.xml" value="0.2578125" />
+        <entry key="app/src/main/res/menu/bottom_nav.xml" value="0.21944444444444444" />
       </map>
     </option>
   </component>

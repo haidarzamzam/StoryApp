@@ -3,42 +3,42 @@ package com.haidev.storyapp.ui.screen.story
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.afollestad.materialdialogs.MaterialDialog
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.haidev.storyapp.R
-import com.haidev.storyapp.databinding.ActivityStoryBinding
+import com.haidev.storyapp.databinding.ActivityParentStoryBinding
 import com.haidev.storyapp.di.prefs
 import com.haidev.storyapp.ui.base.BaseActivity
 import com.haidev.storyapp.ui.screen.login.LoginActivity
-import com.haidev.storyapp.util.LoadingStateAdapter
 import org.koin.android.ext.android.inject
 
-class StoryActivity : BaseActivity<ActivityStoryBinding, StoryViewModel>(),
-    StoryNavigator {
+class ParentStoryActivity : BaseActivity<ActivityParentStoryBinding, ParentStoryViewModel>(),
+    ParentStoryNavigator {
 
-    private val storyViewModel: StoryViewModel by inject()
-    private var _binding: ActivityStoryBinding? = null
+    private val parentStoryViewModel: ParentStoryViewModel by inject()
+    private var _binding: ActivityParentStoryBinding? = null
     private val binding get() = _binding
-
-    private lateinit var storyItemAdapter: StoryItemAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = getViewDataBinding()
         binding?.lifecycleOwner = this
+        parentStoryViewModel.navigator = this
+
         initUI()
     }
 
     private fun initUI() {
-        storyItemAdapter = StoryItemAdapter(this)
-        binding?.rvStory?.layoutManager = LinearLayoutManager(this)
-        binding?.rvStory?.adapter = storyItemAdapter.withLoadStateFooter(
-            footer = LoadingStateAdapter {
-                storyItemAdapter.retry()
-            }
+        val bottomNavigationView = findViewById<BottomNavigationView
+                >(R.id.bottom_navigation_view)
+        val navController = findNavController(R.id.nav_fragment)
+        bottomNavigationView.setupWithNavController(
+            navController
         )
+
         binding?.ivLogout?.setOnClickListener {
             MaterialDialog.Builder(this)
                 .title("Logout")
@@ -52,39 +52,31 @@ class StoryActivity : BaseActivity<ActivityStoryBinding, StoryViewModel>(),
                 .negativeText("No")
                 .onNegative { dialog, _ -> dialog.dismiss() }
                 .show()
-
         }
 
-        binding?.fabAddStory?.setOnClickListener {
+        binding?.ivAddStory?.setOnClickListener {
             goToAddStory()
         }
     }
 
-    override fun setLayout(): Int = R.layout.activity_story
-
-    override fun getViewModels(): StoryViewModel = storyViewModel
-
     override fun goToLogin() {
         finish()
-        startActivity(Intent(this@StoryActivity, LoginActivity::class.java))
+        startActivity(Intent(this, LoginActivity::class.java))
     }
 
     override fun goToAddStory() {
-        val intent = Intent(this@StoryActivity, AddStoryActivity::class.java)
+        val intent = Intent(this, AddStoryActivity::class.java)
         resultLauncher.launch(intent)
     }
 
     private var resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-                //getData()
+                //TODO add request data
             }
         }
 
-    override fun onObserveAction() {
-        storyViewModel.responseStory.observe(this, {
-            Log.d("CHECKK", it.toString())
-            storyItemAdapter.submitData(lifecycle, it)
-        })
-    }
+    override fun setLayout(): Int = R.layout.activity_parent_story
+
+    override fun getViewModels(): ParentStoryViewModel = parentStoryViewModel
 }

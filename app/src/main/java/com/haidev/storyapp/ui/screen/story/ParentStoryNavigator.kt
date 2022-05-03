@@ -1,6 +1,6 @@
 package com.haidev.storyapp.ui.screen.story
 
-interface StoryNavigator {
+interface ParentStoryNavigator {
     fun goToLogin()
     fun goToAddStory()
 }

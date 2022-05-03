@@ -1,22 +1,16 @@
 
-n
->app/src/main/java/com/haidev/storyapp/util/ContextProviders.kt,2/e/2e78b5addeab4f624171f17bab9f7722a4d6c38d
 q
 Aapp/src/main/java/com/haidev/storyapp/ui/custom/MyEditTextName.kt,7/e/7e0f9c92c4a2d78d84ca8ca45ca353cad047c537
 u
 Eapp/src/main/java/com/haidev/storyapp/ui/custom/MyEditTextPassword.kt,b/a/ba42476a98755aed5ca7d93b0c6ad6b46d85837c
 r
 Bapp/src/main/java/com/haidev/storyapp/ui/custom/MyEditTextEmail.kt,0/0/00b4f6185dc09a41a5acb99ca19173932df1704d
-o
-?app/src/main/java/com/haidev/storyapp/util/ValidateFieldUtil.kt,2/5/25eb2d59863d67c73330472d4e6b56baaf09f18c
 g
 7app/src/main/java/com/haidev/storyapp/util/ErrorUtil.kt,c/b/cbabbf22ab96d2a3dce886a64ca675d57c8d7b23
 z
 Japp/src/main/java/com/haidev/storyapp/data/source/sharepref/PrefManager.kt,2/2/220a8123a0540f8b9484d875ad56af8528d0d957
 g
 7app/src/main/java/com/haidev/storyapp/di/InjectedVar.kt,1/b/1b8b64e3781f7cc1d018a3af78b7dda11b479136
-k
-;app/src/main/java/com/haidev/storyapp/util/LifeCycleUtil.kt,3/d/3d0d02d3afc33f7aeeee52ed7e84552dab651e0a
 }
 Mapp/src/main/java/com/haidev/storyapp/ui/screen/register/RegisterNavigator.kt,8/f/8ffb03e5900c37c73976f3cfa473fc46a31e4817
 w
@@ -25,8 +19,6 @@ y
 Iapp/src/main/java/com/haidev/storyapp/ui/screen/splash/SplashViewModel.kt,9/c/9c2414eb13bdc242f3f84f5f5c8eb090c7cc3a8a
 y
 Iapp/src/main/java/com/haidev/storyapp/ui/screen/splash/SplashNavigator.kt,d/7/d7b9c894d51191b1400c60732c959908d7dad122
-x
-Happ/src/main/java/com/haidev/storyapp/ui/screen/splash/SplashActivity.kt,5/9/590bdeefd3622c14ac705af7183bbd41972bf1aa
 ?
 settings.gradle,0/5/05efc8b1657769a27696d478ded1e95f38737233
 }
@@ -39,8 +31,6 @@ u
 Eapp/src/main/java/com/haidev/storyapp/data/source/remote/ApiClient.kt,f/f/ffa229b404f1b7a9debb18ff3651f6bbdd9314b1
 k
 ;app/src/main/java/com/haidev/storyapp/ui/custom/MyDialog.kt,f/e/feeca56ecdc918a3b38c4770c8d18a81cc6f6e21
-P
- app/src/main/AndroidManifest.xml,8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e
 g
 7app/src/main/java/com/haidev/storyapp/util/ImageUtil.kt,8/8/88b2b73e066469813d036c7d0d1bdffd3ced8057
 |

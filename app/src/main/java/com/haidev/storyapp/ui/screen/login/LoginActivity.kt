@@ -19,7 +19,7 @@ import com.haidev.storyapp.di.prefs
 import com.haidev.storyapp.ui.base.BaseActivity
 import com.haidev.storyapp.ui.custom.LoadingScreen
 import com.haidev.storyapp.ui.screen.register.RegisterActivity
-import com.haidev.storyapp.ui.screen.story.StoryActivity
+import com.haidev.storyapp.ui.screen.story.StoryListFragment
 import com.haidev.storyapp.util.isValidEmail
 import com.haidev.storyapp.util.isValidPassword
 import org.koin.android.ext.android.inject
@@ -105,6 +105,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(),
 
     override fun goToStory() {
         finish()
-        startActivity(Intent(this@LoginActivity, StoryActivity::class.java))
+        startActivity(Intent(this@LoginActivity, StoryListFragment::class.java))
     }
 }

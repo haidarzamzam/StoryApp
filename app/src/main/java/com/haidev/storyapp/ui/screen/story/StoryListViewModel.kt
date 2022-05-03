@@ -9,8 +9,8 @@ import com.haidev.storyapp.data.model.StoryModel
 import com.haidev.storyapp.data.source.repository.StoryRepository
 import com.haidev.storyapp.ui.base.BaseViewModel
 
-class StoryViewModel(repository: StoryRepository, application: Application) :
-    BaseViewModel<StoryNavigator>(application) {
+class StoryListViewModel(repository: StoryRepository, application: Application) :
+    BaseViewModel<StoryListNavigator>(application) {
 
     val responseStory: LiveData<PagingData<StoryModel.Response.Story>> =
         repository.getStory().cachedIn(viewModelScope)
