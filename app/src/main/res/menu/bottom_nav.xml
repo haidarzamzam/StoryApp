@@ -4,14 +4,14 @@
     <item
         android:id="@+id/storyListFragment"
         android:icon="@drawable/ic_baseline_view_list_24"
-        android:title="List Story" />
+        android:title="@string/menu_list_story" />
     <item
         android:id="@+id/storyMapFragment"
         android:icon="@drawable/ic_baseline_map_24"
-        android:title="Map Story" />
+        android:title="@string/menu_map_story" />
 
     <item
-        android:id="@+id/storyAbout"
+        android:id="@+id/mapActivity"
         android:icon="@drawable/ic_baseline_info_24"
-        android:title="About" />
+        android:title="@string/menu_about" />
 </menu>

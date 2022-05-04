@@ -1,6 +1,5 @@
 package com.haidev.storyapp.ui.screen.story
 
-interface StoryListNavigator {
+interface StoryMapNavigator {
     fun logout()
-    fun goToAddStory()
 }

@@ -13,10 +13,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.haidev.storyapp.data.model.StoryModel
 import com.haidev.storyapp.databinding.ItemRowStoryBinding
 
-class StoryItemAdapter(
+class StoryListItemAdapter(
     private val context: Context
 ) :
-    PagingDataAdapter<StoryModel.Response.Story, StoryItemAdapter.ViewHolder>(DiffCallback()) {
+    PagingDataAdapter<StoryModel.Response.Story, StoryListItemAdapter.ViewHolder>(DiffCallback()) {
 
     class ViewHolder private constructor(
         private val binding: ItemRowStoryBinding,

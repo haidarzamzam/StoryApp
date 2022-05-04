@@ -27,6 +27,12 @@ interface ApiService {
         @Query("size") size: Int
     ): Deferred<StoryModel.Response>
 
+    @GET("stories")
+    fun storiesLocationAsync(
+        @Header("Authorization") token: String,
+        @Query("location") page: Int = 1
+    ): Deferred<StoryModel.Response>
+
     @Multipart
     @POST("stories")
     fun addStoryAsync(

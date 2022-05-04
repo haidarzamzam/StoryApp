@@ -8,10 +8,21 @@ import androidx.paging.cachedIn
 import com.haidev.storyapp.data.model.StoryModel
 import com.haidev.storyapp.data.source.repository.StoryRepository
 import com.haidev.storyapp.ui.base.BaseViewModel
+import kotlinx.coroutines.launch
 
-class StoryListViewModel(repository: StoryRepository, application: Application) :
+class StoryListViewModel(private val repository: StoryRepository, application: Application) :
     BaseViewModel<StoryListNavigator>(application) {
 
-    val responseStory: LiveData<PagingData<StoryModel.Response.Story>> =
-        repository.getStory().cachedIn(viewModelScope)
+    val responseStory: LiveData<PagingData<StoryModel.Response.Story>>
+        get() = repository.getStory().cachedIn(viewModelScope)
+
+    fun getStories() {
+        viewModelScope.launch {
+            try {
+                repository.getStory().cachedIn(viewModelScope)
+            } catch (t: Throwable) {
+
+            }
+        }
+    }
 }

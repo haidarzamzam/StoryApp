@@ -19,7 +19,7 @@ import com.haidev.storyapp.di.prefs
 import com.haidev.storyapp.ui.base.BaseActivity
 import com.haidev.storyapp.ui.custom.LoadingScreen
 import com.haidev.storyapp.ui.screen.register.RegisterActivity
-import com.haidev.storyapp.ui.screen.story.StoryListFragment
+import com.haidev.storyapp.ui.screen.story.ParentStoryActivity
 import com.haidev.storyapp.util.isValidEmail
 import com.haidev.storyapp.util.isValidPassword
 import org.koin.android.ext.android.inject
@@ -80,7 +80,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(),
     }
 
     override fun onObserveAction() {
-        loginViewModel.responseLogin.observe(this, {
+        loginViewModel.responseLogin.observe(this) {
             when (it?.status) {
                 Status.LOADING ->
                     LoadingScreen.displayLoadingWithText(this, "Checking user. . .", false)
@@ -95,7 +95,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(),
                 }
                 else -> LoadingScreen.hideLoading()
             }
-        })
+        }
     }
 
     override fun goToRegister() {
@@ -105,6 +105,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(),
 
     override fun goToStory() {
         finish()
-        startActivity(Intent(this@LoginActivity, StoryListFragment::class.java))
+        startActivity(Intent(this@LoginActivity, ParentStoryActivity::class.java))
     }
 }

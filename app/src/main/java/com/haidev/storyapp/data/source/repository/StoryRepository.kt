@@ -30,6 +30,11 @@ class StoryRepository(
         ).liveData
     }
 
+    suspend fun getStoryLocation(
+    ): StoryModel.Response {
+        return apiService.storiesLocationAsync(prefs.prefUserToken.toString()).await()
+    }
+
     suspend fun postStory(
         file: MultipartBody.Part, desc: RequestBody
     ): AddStoryModel.Response {
