@@ -12,7 +12,6 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import com.afollestad.materialdialogs.MaterialDialog
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.CustomTarget
@@ -28,10 +27,8 @@ import com.haidev.storyapp.R
 import com.haidev.storyapp.data.model.Status
 import com.haidev.storyapp.data.model.StoryModel
 import com.haidev.storyapp.databinding.FragmentStoryMapBinding
-import com.haidev.storyapp.di.prefs
 import com.haidev.storyapp.ui.base.BaseFragment
 import com.haidev.storyapp.ui.custom.LoadingScreen
-import com.haidev.storyapp.ui.screen.login.LoginActivity
 import org.koin.android.ext.android.inject
 
 class StoryMapFragment : BaseFragment<FragmentStoryMapBinding, StoryMapViewModel>(),
@@ -51,23 +48,6 @@ class StoryMapFragment : BaseFragment<FragmentStoryMapBinding, StoryMapViewModel
         _binding = getViewDataBinding()
         binding?.lifecycleOwner = this
         storyMapViewModel.navigator = this
-        initUI()
-    }
-
-    private fun initUI() {
-        binding?.ivLogout?.setOnClickListener {
-            MaterialDialog.Builder(requireContext())
-                .title("Logout")
-                .content("Are you sure you want to logout the app?")
-                .cancelable(false)
-                .positiveText("Yes")
-                .onPositive { _, _ ->
-                    logout()
-                }
-                .negativeText("No")
-                .onNegative { dialog, _ -> dialog.dismiss() }
-                .show()
-        }
     }
 
     private fun initMaps() {
@@ -234,11 +214,5 @@ class StoryMapFragment : BaseFragment<FragmentStoryMapBinding, StoryMapViewModel
         } catch (exception: Resources.NotFoundException) {
             Log.e(TAG, "Can't find style. Error: ", exception)
         }
-    }
-
-    override fun logout() {
-        prefs.prefUserToken = ""
-        activity?.finish()
-        startActivity(Intent(requireContext(), LoginActivity::class.java))
     }
 }

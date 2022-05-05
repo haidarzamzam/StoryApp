@@ -4,12 +4,9 @@ import android.app.Activity
 import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.afollestad.materialdialogs.MaterialDialog
 import com.haidev.storyapp.R
 import com.haidev.storyapp.databinding.FragmentStoryListBinding
-import com.haidev.storyapp.di.prefs
 import com.haidev.storyapp.ui.base.BaseFragment
-import com.haidev.storyapp.ui.screen.login.LoginActivity
 import com.haidev.storyapp.util.LoadingStateAdapter
 import org.koin.android.ext.android.inject
 
@@ -31,22 +28,6 @@ class StoryListFragment : BaseFragment<FragmentStoryListBinding, StoryListViewMo
     }
 
     private fun initUI() {
-        binding?.rvStory?.smoothScrollToPosition(0)
-
-        binding?.ivLogout?.setOnClickListener {
-            MaterialDialog.Builder(requireContext())
-                .title("Logout")
-                .content("Are you sure you want to logout the app?")
-                .cancelable(false)
-                .positiveText("Yes")
-                .onPositive { _, _ ->
-                    logout()
-                }
-                .negativeText("No")
-                .onNegative { dialog, _ -> dialog.dismiss() }
-                .show()
-        }
-
         binding?.ivAddStory?.setOnClickListener {
             goToAddStory()
         }
@@ -79,12 +60,6 @@ class StoryListFragment : BaseFragment<FragmentStoryListBinding, StoryListViewMo
     }
 
     override fun onReadyAction() {}
-
-    override fun logout() {
-        prefs.prefUserToken = ""
-        activity?.finish()
-        startActivity(Intent(requireContext(), LoginActivity::class.java))
-    }
 
     override fun goToAddStory() {
         val intent = Intent(requireContext(), AddStoryActivity::class.java)

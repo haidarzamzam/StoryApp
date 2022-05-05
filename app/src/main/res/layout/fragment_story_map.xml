@@ -45,15 +45,6 @@
                     android:text="@string/story_with_map"
                     android:textColor="@color/white" />
             </LinearLayout>
-
-            <ImageView
-                android:id="@+id/iv_logout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:contentDescription="@string/logo_logout_storyapp"
-                android:padding="14dp"
-                android:src="@drawable/ic_baseline_exit_to_app_24" />
         </Toolbar>
 
         <fragment

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">StoryApp</string>
+    <string name="add_story">Tambah Story</string>
+    <string name="detail_story">Detail Story</string>
+
+    <string name="register">Daftar</string>
+    <string name="login">Masuk</string>
+    <string name="name">Nama</string>
+    <string name="email">Email</string>
+    <string name="password">Kata sandi</string>
+    <string name="description">Deskripsi</string>
+    <string name="have_an_account_log_in">Sudah punya akun? Masuk</string>
+    <string name="dont_have_an_account_sign_up">Belum punya akun? Daftar</string>
+
+    <string name="upload_camera">Unggah Kamera</string>
+    <string name="upload_gallery">Unggah Galeri</string>
+    <string name="upload">Unggah</string>
+    <string name="retry">Ulang</string>
+    <string name="loading">Memuat . . .</string>
+
+    <string name="logo_storyapp">Logo StoryApp</string>
+    <string name="logo_back_storyapp">Logo Kembali StoryApp</string>
+    <string name="logo_add_storyapp">Logo Tambah StoryApp</string>
+    <string name="image_thumbnail_storyapp">Image Thumbnail StoryApp</string>
+
+    <string name="menu_list_story">Daftar Story</string>
+    <string name="menu_map_story">Map Story</string>
+    <string name="menu_account">Akun</string>
+
+    <string name="story_with_list">Story dengan List</string>
+    <string name="story_with_map">Story dengan Map</string>
+
+    <string name="name_account">Haidar Zamzam</string>
+    <string name="title_account">Mobile Developer di Riliv</string>
+
+    <string name="option_change_language">Ganti Bahasa</string>
+    <string name="option_app_information">Informasi App</string>
+    <string name="option_logout">Keluar</string>
+
+    <string name="icon_change_language">Icon ganti bahasa</string>
+    <string name="icon_app_information">Icon informasi app</string>
+    <string name="icon_logout">Icon keluar</string>
+
+    <string name="desc_logout">Apakah anda yakin keluar aplikasi?</string>
+    <string name="yes">Iya</string>
+    <string name="no">Tidak</string>
+
+    <string name="toast_checking_user">Memeriksa user. . .</string>
+    <string name="toast_check_your_warning">Periksa peringatan anda!</string>
+    <string name="toast_creating_user">Membuat user. . .</string>
+    <string name="toast_register_successfully">Daftar berhasil, silahkan masuk!</string>
+    <string name="toast_upload_story">"Mengunggah story. . ."</string>
+    <string name="toast_upload_story_successfully">Unggah story berhasil!</string>
+    <string name="toast_please_fill_descrtiption">Tolong isi foto dan deskripsi!</string>
+</resources>

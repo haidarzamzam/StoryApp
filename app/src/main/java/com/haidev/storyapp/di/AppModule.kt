@@ -3,6 +3,7 @@ package com.haidev.storyapp.di
 import com.haidev.storyapp.data.source.local.sharepref.PrefManager
 import com.haidev.storyapp.data.source.repository.StoryRepository
 import com.haidev.storyapp.data.source.repository.UserRepository
+import com.haidev.storyapp.ui.screen.account.AccountViewModel
 import com.haidev.storyapp.ui.screen.login.LoginViewModel
 import com.haidev.storyapp.ui.screen.register.RegisterViewModel
 import com.haidev.storyapp.ui.screen.splash.SplashViewModel
@@ -17,6 +18,7 @@ val viewModelModule = module {
     viewModel { LoginViewModel(get(), androidApplication()) }
     viewModel { RegisterViewModel(get(), androidApplication()) }
     viewModel { ParentStoryViewModel(androidApplication()) }
+    viewModel { AccountViewModel(androidApplication()) }
     viewModel { StoryListViewModel(get(), androidApplication()) }
     viewModel { StoryMapViewModel(get(), androidApplication()) }
     viewModel { DetailStoryViewModel(androidApplication()) }
