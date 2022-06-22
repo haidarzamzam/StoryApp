@@ -21,6 +21,7 @@ import com.haidev.storyapp.util.isValidEmail
 import com.haidev.storyapp.util.isValidName
 import com.haidev.storyapp.util.isValidPassword
 import org.koin.android.ext.android.inject
+import java.util.*
 
 class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel>(),
     RegisterNavigator {
@@ -42,7 +43,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
     override fun getViewModels(): RegisterViewModel = registerViewModel
 
     private fun initUI() {
-        val ss = SpannableString("Have an account? Log in")
+        val ss = SpannableString(resources.getString(R.string.have_an_account_log_in))
         val clickSpan = object : ClickableSpan() {
             override fun onClick(widget: View) {
                 goToLogin(false)
@@ -55,7 +56,11 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
                 ds.isUnderlineText = false
             }
         }
-        ss.setSpan(clickSpan, 17, 23, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        when (Locale.getDefault().language) {
+            "en" -> ss.setSpan(clickSpan, 17, 23, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            "in" -> ss.setSpan(clickSpan, 18, 23, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
+
         binding?.tvSignup?.text = ss
         binding?.tvSignup?.movementMethod = LinkMovementMethod.getInstance()
     }
@@ -66,7 +71,11 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
                     .isValidEmail() && !binding?.etName?.text.toString()
                     .isValidName() && !binding?.etPassword?.text.toString().isValidPassword()
             ) {
-                Toast.makeText(this, "Check your warning!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    resources.getString(R.string.toast_check_your_warning),
+                    Toast.LENGTH_SHORT
+                ).show()
             } else {
                 val payload = RegisterModel.Payload(
                     binding?.etEmail?.text.toString(),
@@ -79,10 +88,14 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
     }
 
     override fun onObserveAction() {
-        registerViewModel.responseRegister.observe(this, {
+        registerViewModel.responseRegister.observe(this) {
             when (it?.status) {
                 Status.LOADING ->
-                    LoadingScreen.displayLoadingWithText(this, "Creating user. . .", false)
+                    LoadingScreen.displayLoadingWithText(
+                        this,
+                        resources.getString(R.string.toast_creating_user),
+                        false
+                    )
                 Status.SUCCESS -> {
                     LoadingScreen.hideLoading()
                     goToLogin(true)
@@ -93,14 +106,14 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
                 }
                 else -> LoadingScreen.hideLoading()
             }
-        })
+        }
     }
 
 
     override fun goToLogin(isRegistered: Boolean) {
         if (isRegistered) Toast.makeText(
             this,
-            "Register successfully, please login!",
+            resources.getString(R.string.toast_register_successfully),
             Toast.LENGTH_SHORT
         ).show()
         finish()

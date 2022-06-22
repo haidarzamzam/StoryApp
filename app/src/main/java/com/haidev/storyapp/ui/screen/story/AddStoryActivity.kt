@@ -78,7 +78,11 @@ class AddStoryActivity : BaseActivity<ActivityAddStoryBinding, AddStoryViewModel
 
                 desc?.let { it -> addStoryViewModel.postAddStory(imageMultipart, it) }
             } else {
-                Toast.makeText(this, "Please fill photo and description!", Toast.LENGTH_SHORT)
+                Toast.makeText(
+                    this,
+                    resources.getString(R.string.toast_please_fill_descrtiption),
+                    Toast.LENGTH_SHORT
+                )
                     .show()
             }
 
@@ -86,13 +90,21 @@ class AddStoryActivity : BaseActivity<ActivityAddStoryBinding, AddStoryViewModel
     }
 
     override fun onObserveAction() {
-        addStoryViewModel.responseAddStory.observe(this, {
+        addStoryViewModel.responseAddStory.observe(this) {
             when (it?.status) {
                 Status.LOADING ->
-                    LoadingScreen.displayLoadingWithText(this, "Upload story. . .", false)
+                    LoadingScreen.displayLoadingWithText(
+                        this,
+                        resources.getString(R.string.toast_upload_story),
+                        false
+                    )
                 Status.SUCCESS -> {
                     LoadingScreen.hideLoading()
-                    Toast.makeText(this, "Upload story success", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        resources.getString(R.string.toast_upload_story_successfully),
+                        Toast.LENGTH_SHORT
+                    ).show()
                     backToHome()
                 }
                 Status.ERROR -> {
@@ -101,7 +113,7 @@ class AddStoryActivity : BaseActivity<ActivityAddStoryBinding, AddStoryViewModel
                 }
                 else -> LoadingScreen.hideLoading()
             }
-        })
+        }
     }
 
     override fun setLayout(): Int = R.layout.activity_add_story

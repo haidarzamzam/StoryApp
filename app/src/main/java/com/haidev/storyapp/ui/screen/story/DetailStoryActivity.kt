@@ -26,9 +26,8 @@ class DetailStoryActivity : BaseActivity<ActivityDetailStoryBinding, DetailStory
     }
 
     private fun initUI() {
-        dataStory =
-            intent.getParcelableExtra<StoryModel.Response.Story>(EXTRA_DATA_STORY)
-                    as StoryModel.Response.Story
+        dataStory = intent.getParcelableExtra<StoryModel.Response.Story>(EXTRA_DATA_STORY)
+                as StoryModel.Response.Story
 
         binding?.ivBack?.setOnClickListener {
             finish()

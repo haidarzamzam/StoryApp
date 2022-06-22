@@ -107,9 +107,10 @@
 
         <TextView
             android:id="@+id/tv_signup"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
+            android:textAlignment="center"
             android:fontFamily="@font/google_sans_regular"
             android:text="@string/dont_have_an_account_sign_up"
             android:textColor="@color/white"

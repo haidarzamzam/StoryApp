@@ -37,7 +37,7 @@ interface ApiService {
     @POST("stories")
     fun addStoryAsync(
         @Header("Authorization") token: String,
-        @Part file: MultipartBody.Part,
+        @Part image: MultipartBody.Part,
         @Part("description") description: RequestBody,
     ): Deferred<AddStoryModel.Response>
 }

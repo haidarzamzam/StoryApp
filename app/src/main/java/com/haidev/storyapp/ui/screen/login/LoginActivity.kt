@@ -23,6 +23,7 @@ import com.haidev.storyapp.ui.screen.story.ParentStoryActivity
 import com.haidev.storyapp.util.isValidEmail
 import com.haidev.storyapp.util.isValidPassword
 import org.koin.android.ext.android.inject
+import java.util.*
 
 
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(),
@@ -45,7 +46,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(),
     override fun getViewModels(): LoginViewModel = loginViewModel
 
     private fun initUI() {
-        val ss = SpannableString("Don't have an account? Sign up")
+        val ss = SpannableString(resources.getString(R.string.dont_have_an_account_sign_up))
         val clickSpan = object : ClickableSpan() {
             override fun onClick(widget: View) {
                 goToRegister()
@@ -58,7 +59,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(),
                 ds.isUnderlineText = false
             }
         }
-        ss.setSpan(clickSpan, 23, 30, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+        when (Locale.getDefault().language) {
+            "en" -> ss.setSpan(clickSpan, 23, 30, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            "in" -> ss.setSpan(clickSpan, 18, 24, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
+
         binding?.tvSignup?.text = ss
         binding?.tvSignup?.movementMethod = LinkMovementMethod.getInstance()
     }
@@ -68,7 +74,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(),
             if (!binding?.etEmail?.text.toString()
                     .isValidEmail() && !binding?.etPassword?.text.toString().isValidPassword()
             ) {
-                Toast.makeText(this, "Check your warning!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    resources.getString(R.string.toast_check_your_warning),
+                    Toast.LENGTH_SHORT
+                ).show()
             } else {
                 val payload = LoginModel.Payload(
                     binding?.etEmail?.text.toString(),
@@ -83,7 +93,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(),
         loginViewModel.responseLogin.observe(this) {
             when (it?.status) {
                 Status.LOADING ->
-                    LoadingScreen.displayLoadingWithText(this, "Checking user. . .", false)
+                    LoadingScreen.displayLoadingWithText(
+                        this,
+                        resources.getString(R.string.toast_checking_user),
+                        false
+                    )
                 Status.SUCCESS -> {
                     LoadingScreen.hideLoading()
                     prefs.prefUserToken = "Bearer ${it.data?.loginResult?.token}"
